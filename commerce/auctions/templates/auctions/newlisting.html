@@ -1,0 +1,35 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% if user.is_authenticated %}    
+    <h2>Create a new listing</h2>
+    <form action="{% url 'newlisting' %}", method="post">
+        {% csrf_token %}
+        Listing Title:
+        <input type="text" name="title" class="text"></input>
+        <br><br>
+        Listing Description:
+        <input type="text" name="description" class="text"></input>
+        <br><br>
+        Starting Price:
+        <input type="numeric" name="starting" class="text"></input>
+        <br><br>
+        Image URL:
+        <input type="text" name="image" class="text"></input>
+        <br><br>
+        Category:
+        <select name="category" class="text2">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.type }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type = "submit" class="text2" value="Create new listing">
+    </form>
+{% else %}
+    Not signed in. Please 
+    <a href="{% url 'login' %}">sign in</a> to create a new listing.
+{% endif %}
+
+
+{% endblock %}

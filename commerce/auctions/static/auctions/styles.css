@@ -1,0 +1,161 @@
+body {
+    background-color: rgb(249, 185, 129);
+    padding: 10px;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+}
+
+hr {
+    border-color: black;
+}
+
+
+p {
+    font-size: 14px;
+}
+
+.disappear {
+    background-color: rgb(249, 185, 129);
+    color: rgb(249, 185, 129);
+    border: rgb(249, 185, 129);
+
+
+}
+
+.margintop {
+    margin-top: 10px;
+}
+
+.marginleft{
+    margin-left: 30px;
+    font-size: 18px;
+}
+
+.section {
+    border-radius: 10px;
+    border: 2px solid black
+}
+
+
+.text2 {
+    position: absolute;
+    left: 180px;
+    border-radius: 10px;
+    border-color: black;
+}
+
+.text3 {
+    border-radius: 10px;
+    border-color: black;
+    height: 35px;
+}
+
+
+
+.text {
+    position: absolute;
+    left: 180px;
+    border-radius: 10px;
+    border-color: black;
+    width: 600px;
+}
+
+.bid{
+    border-radius: 10px;
+    border-color: black;
+    height: 35px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+
+
+.comment{
+    border-radius: 10px;
+    border-color: black;
+    width: 600px;
+    height: 35px;
+    margin-top: 10px;
+}
+
+
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+h2 {
+    text-align: center;
+}
+
+h4{
+    margin-left: 40px;
+}
+
+h5{
+    font-size: 12px;
+}
+
+h6{
+    font-size: 20px;
+}
+
+.view{
+    text-decoration: none;
+}
+
+.full {
+    background-color: rgb(249, 185, 129);
+    color: black;
+    margin: 20px;
+    padding: 20px;
+}
+
+.spacing{
+    width: 10%;
+    margin-left:40px;
+}
+
+.image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.listing {
+    background-color: rgb(249, 185, 129);
+    border-radius: 10px;
+    border: 2px solid black;
+    color: black;
+    margin: 20px;
+    padding: 20px;
+    width: 400px;
+}
+
+.closed {
+    opacity: 50%;
+    background-color: rgb(249, 185, 129);
+    border-radius: 10px;
+    border: 2px solid black;
+    color: black;
+    margin: 20px;
+    padding: 20px;
+    width: 400px;
+}
+
+.listing:hover {
+    background-color: rgb(249, 193, 145);
+    transform: translateY(-3px);
+}
+
+
+.images {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:80%;
+    border: 2px solid black;
+}

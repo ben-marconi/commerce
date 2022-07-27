@@ -1,0 +1,67 @@
+{% extends "auctions/layout.html" %}
+
+
+{% block body %}
+<br>
+<h4> {{ listing.title }} </h4>
+<div id="container" style="border: solid 2px black; border-radius:10px;">  
+    <div class="full">
+        <h5>Posted by  {{ listing.poster }} on {{ listing.date }}</h5>
+        <img src={{ listing.image }} alt="Product Image" class ="image">
+    </div>
+    <div class="full">
+        <br>
+        <h6>Sold for: {{ listing.starting}}£ </h6>
+        <br>
+        {% if user.is_authenticated %}
+            {% if isowner %}
+                Congratulations {{ user.username }}! You have sold this item to {{ listing.buyer }}.
+            {% else %}
+                {% if not isbuyer %}
+                <p>This item has been sold, the lister is no longer accepting bids.</p>    
+                {% else %}
+                    Congratulations {{ user.username }}! You have successfully bought this item.
+                {% endif %}
+                <form action="{% url 'item' listing.id %}", method="post">
+                    {% csrf_token %}
+                    <br>
+                    Leave a comment:
+                    <br>
+                    <input type="text" name = "title" class="bid" placeholder="Title of comment" ></input>
+                    <br>
+                    <input type="text" name = "content"class="comment" placeholder="Content of comment" ></input>
+                    <input type="submit" class="text3"></input>
+                </form> 
+                {% endif %}
+                <br>
+                <form method="post" action="{% url 'watchlist' listing.id%}">
+                    {% csrf_token %}
+                    {% if in_watchlist %}
+                        <input type="submit" value='Remove item from watchlist' class="text3"></input>
+                    {% endif %}
+                </form>
+        {% else %}
+            Not signed in. Please sign in if you won this auction. 
+            <a href="{% url 'login' %}">sign in</a> to bid or comment.
+        {% endif %}
+    </div>
+</div>
+<div>
+    <br>
+    <h4>Comment Section: </h4>
+    {% for comment in comments %}
+        <div class="section">
+            <h4 class="margintop">{{ comment.title }}</h4>
+            <h5 style="margin-left:40px">Posted by  {{ comment.commenter }} on {{ comment.date }}</h5>
+            <hr style="width:97%">
+            <p class="marginleft">{{comment.content}}</p>
+        </div>
+        <br>
+    {% empty %}
+            <br><br>
+            <h2 style="font-size:20px; margin-bottom: 20px;"> No comments yet. Start the conversation by adding a comment above!<h4>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

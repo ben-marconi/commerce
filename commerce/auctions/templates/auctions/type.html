@@ -1,0 +1,37 @@
+{% extends "auctions/category.html" %}
+
+
+
+{% block items %}
+<div id="container">
+    {% for listing in active_listings %}
+            <a href="{% url 'item' listing.id%}" style="text-decoration: none">
+                <div class = "listing">
+                    <h4> {{ listing.title }} </h4>
+                    <h5>Posted by  {{ listing.poster}} on {{ listing.date }}</h5>
+                    <hr>
+                    <img src={{ listing.image }} alt="Product Image" class ="images">
+                    <br>
+                    <p>Current Price: {{ listing.starting}}£</p>
+                    <p>Description: {{ listing.description }}</p>
+                </div>
+            </a>
+    {% empty %}
+    {% endfor %}
+    <br>
+    {% for listing in inactive_listings %}
+            <a href="{% url 'closed' listing.id%}" style="text-decoration: none">
+                <div class = "closed">
+                    <h4> {{ listing.title }} </h4>
+                    <h5>Posted by  {{ listing.poster}} on {{ listing.date }}</h5>
+                    <hr>
+                    <img src={{ listing.image }} alt="Product Image" class ="images">
+                    <br>
+                    <p>This listing has been closed. </p>
+                    <p>Sold at: {{ listing.starting}}£</p>
+                </div>
+            </a>
+    {% endfor %}
+
+    </div>
+{% endblock %}

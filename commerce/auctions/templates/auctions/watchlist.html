@@ -1,0 +1,96 @@
+{% extends "auctions/layout.html" %}
+
+
+{% block body %}
+<br>
+<h4> {{ listing.title }} </h4>
+<div id="container" style="border: solid 2px black; border-radius:10px;">  
+    <div class="full">
+        <h5>Posted by  {{ listing.poster }} on {{ listing.date }}</h5>
+        <img src={{ listing.image }} alt="No image available" class ="image">
+    </div>
+    <div class="full">
+        <br>
+        <h6>
+            Current Price: {{ listing.starting}}£
+            <br>
+            {% if has_bid %}
+                Highest bid by {{ listing.buyer }}
+            {% else %}   
+                No bidders yet, be the first to bid!
+            {% endif %}
+        </h6>
+        <br>
+        <p>Category: {{ listing.category }}</p>
+        <p>Description: {{ listing.description }}</p>
+        <br>
+        {% if user.is_authenticated %}
+            {% if not isowner %}    
+                <form action="{% url 'bid' listing.id %}", method="post">
+                    {% csrf_token %}
+                    <p>
+                        Make a bid:
+                        <br>
+                        <input type="text" name = "bid" class="bid" placeholder="Your bid here"></input>
+                        <input type="submit" value = "Submit bid" class="text3"></input>
+                    </p>
+                </form>
+                <br>
+                <p>
+                    <form action="{% url 'item' listing.id %}", method="post">
+                        {% csrf_token %}
+                        Leave a comment:
+                        <br>
+                        <input type="text" name = "title" class="bid" placeholder="Title of comment" ></input>
+                        <br>
+                        <input type="text" name = "content"class="comment" placeholder="Content of comment" ></input>
+                        <input type="submit" value = "Submit comment" class="text3"></input>
+                    </form>
+                </p> 
+                <p>
+                    <br>
+                    <form method="post" action="{% url 'watchlist' listing.id %}">
+                        {% csrf_token %}
+                        {% if in_watchlist %}
+                            <input type="submit" value='Remove item from watchlist' class="text3"></input>
+                        {% else %}
+                            <input type="submit" value='Add item to watchlist' class="text3"></input>
+                        {% endif %}
+                    </form>
+                </p>
+            {% else %}
+                {% if has_bid %}
+                    <form method="post" action = {% url 'item' listing.id %}>
+                        {% csrf_token %}
+                        Close listing and sell item for {{ listing.starting }}£:
+                        <input type="submit" value="Close listing" class="text3"></input>
+                    </form>
+                {% else %}
+                    This item has no bids yet. Wait for a bidder before closing this listing.
+                {% endif %}
+            {% endif %}
+        {% else %}
+            Not signed in. Please 
+            <a href="{% url 'login' %}">sign in</a> to bid or comment.
+        {% endif %}
+    </div>
+</div>
+<div>
+    <br>
+    <h4>Comment Section: </h4>
+    {% for comment in comments %}
+        <div class="section">
+            <h4 class="margintop">{{ comment.title }}</h4>
+            <h5 style="margin-left:40px">Posted by  {{ comment.commenter }} on {{ comment.date }}</h5>
+            <hr style="width:97%">
+            <p class="marginleft">{{comment.content}}</p>
+        </div>
+        <br>
+    {% empty %}
+            <br><br>
+            <h2 style="font-size:20px; margin-bottom: 20px;"> No comments yet. Start the conversation by adding a comment above!<h4>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
