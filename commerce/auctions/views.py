@@ -20,6 +20,7 @@ DEMO_CHOICES =(
 
 def index(request):
     listings = Listing.objects.all()
+    listings = listings.order_by("-date").all()
     active = []
     inactive = []
     for listing in listings:
@@ -102,6 +103,8 @@ def item(request, item_id):
     has_bid = listing.poster != listing.buyer
     poster = request.user
     in_watchlist = False
+    comments  = listing.comments.all()
+    comments = comments.order_by("-date").all()
     if request.user.is_authenticated:
         for listin in poster.watchlist.all():
             if listin == listing:
@@ -119,7 +122,7 @@ def item(request, item_id):
                 comment = Comment(commenter = poster, listing = listing, title = title, content = content)
                 comment.save()
                 return HttpResponseRedirect(reverse("index"))
-    return render(request, "auctions/listing.html", {"listing": listing, "comments": listing.comments.all(), "isowner":isowner, "has_bid":has_bid, "in_watchlist": in_watchlist})
+    return render(request, "auctions/listing.html", {"listing": listing, "comments": comments, "isowner":isowner, "has_bid":has_bid, "in_watchlist": in_watchlist})
 
 
 
@@ -214,6 +217,7 @@ def type(request, category_id):
     cat = Category.objects.get(id=category_id)
     message = f"Category selected: {cat.type}"
     listings = cat.category.all()
+    listings = listings.order_by("-date").all()
     active = []
     inactive = []
     for listing in listings:
@@ -228,6 +232,7 @@ def type(request, category_id):
 def mywatchlist(request):
     poster = request.user
     listings = poster.watchlist.all()
+    listings = listings.order_by("-date").all()
     message = "Items in your watchlist"
     active = []
     inactive = []

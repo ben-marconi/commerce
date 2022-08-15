@@ -1,22 +1,26 @@
 body {
-    background-color: rgb(249, 185, 129);
+    background-color: black;
     padding: 10px;
-    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    font-family: Futura;
+    color: rgba(251, 163, 0, 0.816);
 }
 
 hr {
-    border-color: black;
+    border-color: rgba(251, 163, 0, 0.816);
 }
 
+a {
+    color: rgba(251, 163, 0, 0.816);
+}
 
 p {
     font-size: 14px;
 }
 
 .disappear {
-    background-color: rgb(249, 185, 129);
-    color: rgb(249, 185, 129);
-    border: rgb(249, 185, 129);
+    background-color: black;
+    color: black;
+    border: black;
 
 
 }
@@ -32,7 +36,7 @@ p {
 
 .section {
     border-radius: 10px;
-    border: 2px solid black
+    border: 2px solid rgba(251, 163, 0, 0.816);
 }
 
 
@@ -40,13 +44,29 @@ p {
     position: absolute;
     left: 180px;
     border-radius: 10px;
-    border-color: black;
+    border: solid rgba(251, 163, 0, 0.816);
+    background-color: black;
+    color: rgba(251, 163, 0, 0.816);
 }
 
 .text3 {
     border-radius: 10px;
-    border-color: black;
+    border: solid rgba(251, 163, 0, 0.816);
+    background-color: black;
+    color: rgba(251, 163, 0, 0.816);
     height: 35px;
+}
+
+.text:hover {
+    background-color: rgb(37, 37, 37);
+}
+
+.text2:hover {
+    background-color: rgb(37, 37, 37);
+}
+
+.text3:hover {
+    background-color: rgb(37, 37, 37);
 }
 
 
@@ -55,14 +75,18 @@ p {
     position: absolute;
     left: 180px;
     border-radius: 10px;
-    border-color: black;
+    border: solid rgba(251, 163, 0, 0.816);
+    background-color: black;
+    color: rgba(251, 163, 0, 0.816);
     width: 600px;
 }
 
 .bid{
     border-radius: 10px;
-    border-color: black;
+    border: solid rgba(251, 163, 0, 0.816);
     height: 35px;
+    background-color: black;
+    color: rgba(251, 163, 0, 0.816);
     margin-bottom: 5px;
     margin-top: 5px;
 }
@@ -71,8 +95,10 @@ p {
 
 .comment{
     border-radius: 10px;
-    border-color: black;
+    border: solid rgba(251, 163, 0, 0.816);
     width: 600px;
+    background-color: black;
+    color: rgba(251, 163, 0, 0.816);
     height: 35px;
     margin-top: 10px;
 }
@@ -82,6 +108,7 @@ p {
 #container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 h2 {
@@ -105,8 +132,8 @@ h6{
 }
 
 .full {
-    background-color: rgb(249, 185, 129);
-    color: black;
+    background-color: black;
+    color: rgba(251, 163, 0, 0.816);
     margin: 20px;
     padding: 20px;
 }
@@ -121,15 +148,15 @@ h6{
     margin-left: auto;
     margin-right: auto;
     width: 600px;
-    border: 2px solid black;
+    border: 3px solid rgba(251, 163, 0, 0.816);
     border-radius: 10px;
 }
 
 .listing {
-    background-color: rgb(249, 185, 129);
+    background-color: black;
     border-radius: 10px;
-    border: 2px solid black;
-    color: black;
+    border: 2px solid rgba(251, 163, 0, 0.816);
+    color: rgba(251, 163, 0, 0.816);
     margin: 20px;
     padding: 20px;
     width: 400px;
@@ -137,17 +164,17 @@ h6{
 
 .closed {
     opacity: 50%;
-    background-color: rgb(249, 185, 129);
+    background-color: black;
     border-radius: 10px;
-    border: 2px solid black;
-    color: black;
+    border: 2px solid rgba(251, 163, 0, 0.816);
+    color: rgba(251, 163, 0, 0.816);
     margin: 20px;
     padding: 20px;
     width: 400px;
 }
 
 .listing:hover {
-    background-color: rgb(249, 193, 145);
+    background-color: rgb(37, 37, 37);
     transform: translateY(-3px);
 }
 
@@ -157,5 +184,51 @@ h6{
     margin-left: auto;
     margin-right: auto;
     width:80%;
-    border: 2px solid black;
+    border: 2px solid rgba(251, 163, 0, 0.816);
+    border-radius: 10px;
+}
+
+
+@keyframes show {
+    0%{
+        height: 0px;
+        line-height: 0px;
+        padding: 0px;
+        margin-bottom: 0px;
+        opacity: 0
+    }
+    15%{
+        opacity:1;
+        height: 100%;
+        line-height: 100%;
+        padding: 20px;
+        margin-bottom: 10px;
+
+    }
+    85%{
+        opacity:1;
+        height: 100%;
+        line-height: 100%;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+    100%{
+        height: 0px;
+        line-height: 0px;
+        padding: 0px;
+        margin-bottom: 0px;
+        opacity:0;
+    }
+}
+
+#notsignedin{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    animation-name: show;
+    animation-duration: 8s;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+    animation-iteration-count: infinite;
+
 }

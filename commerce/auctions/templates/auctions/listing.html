@@ -1,5 +1,23 @@
 {% extends "auctions/layout.html" %}
 
+{% block script %}
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
+        let bid_btn = document.querySelector('#submit_bid');
+        bid_btn.disabled = true;
+        document.querySelector("#bid_value").onkeyup = () => {
+            let bid_value = parseInt(document.querySelector("#bid_value").value);
+            console.log(bid_value);
+            const last_bid = {{ listing.starting }};
+            if(bid_value>last_bid){
+                bid_btn.disabled = false;
+            }
+        };
+
+</script>
+{% endblock %}
 
 {% block body %}
 <br>
@@ -31,8 +49,8 @@
                     <p>
                         Make a bid:
                         <br>
-                        <input type="text" name = "bid" class="bid" placeholder="Your bid here"></input>
-                        <input type="submit" value = "Submit bid" class="text3"></input>
+                        <input type="text" name = "bid" class="bid" id = "bid_value" placeholder="Your bid here"></input>
+                        <input type="submit" value = "Submit bid" class="text3" id = 'submit_bid'></input>
                     </p>
                 </form>
                 <br>
@@ -65,7 +83,7 @@
                     <form method="post" action = {% url 'item' listing.id %}>
                         {% csrf_token %}
                         Close listing and sell item for {{ listing.starting }}£:
-                        <input type="submit" value="Close listing"></input>
+                        <input type="submit" value="Close listing" class="text3"></input>
                     </form>
                 {% else %}
                     This item has no bids yet. Wait for a bidder before closing this listing.
