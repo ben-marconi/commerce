@@ -1,2 +1,2 @@
 # commerce
-Auction website
+This project is an auction website built using Django. 
